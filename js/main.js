@@ -16,14 +16,20 @@ async function initDashboard() {
 }
 
 function displayRandomQuote() {
-  const quoteContainer = document.getElementById('quote-container');
-  const randomIndex = Math.floor(Math.random() * data.quotes.length);
-  const quote = data.quotes[randomIndex];
+  const quoteTextEl = document.getElementById('quote-text');
+  const quoteAuthorEl = document.getElementById('quote-author');
 
-  quoteContainer.innerHTML = `
-    <div class="quote-text">"${quote.text}"</div>
-    <div class="quote-author">- ${quote.author || 'Unknown'}</div>
-  `;
+  if (!data.quotes?.length) {
+    quoteTextEl.textContent = "Inspirational quotes coming soon...";
+    quoteAuthorEl.textContent = "";
+    return;
+  }
+
+ 
+  const randomQuote = data.quotes[Math.floor(Math.random() * data.quotes.length)];
+
+  quoteTextEl.textContent = `"${randomQuote.text}"`;
+  quoteAuthorEl.textContent = randomQuote.author ? `— ${randomQuote.author}` : "";
 }
 
 document.addEventListener('DOMContentLoaded', initDashboard);

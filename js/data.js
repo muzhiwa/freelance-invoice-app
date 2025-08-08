@@ -7,7 +7,7 @@ const data = {
 
 async function loadQuotes() {
   try {
-    const response = await fetch('./data/quotes.json');
+    const response = await fetch('/data/quotes.json');
     if (!response.ok) throw new Error('Failed to load quotes');
     data.quotes = await response.json();
   } catch (error) {

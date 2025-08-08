@@ -1,4 +1,5 @@
 import { data, saveData } from './data.js';
+import { updateDashboardStats } from './utils.js';
 
 function initClientPage() {
   renderClientList();
