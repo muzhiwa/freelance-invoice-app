@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InvoiceFlow - Invoices</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">
+                <h1><i class="fas fa-file-invoice"></i> InvoiceFlow</h1>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Dashboard</a>
+                <a href="clients.html" class="nav-link"><i class="fas fa-users"></i> Clients</a>
+                <a href="invoices.html" class="nav-link active"><i class="fas fa-receipt"></i> Invoices</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="header">
+                <h1>Invoice Management</h1>
+                <button id="add-invoice-btn" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> New Invoice
+                </button>
+            </header>
+
+            <section id="invoice-form-container" class="form-container hidden">
+                <h2 id="form-title">Create New Invoice</h2>
+                <form id="invoice-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="invoice-client">Client *</label>
+                            <select id="invoice-client" required>
+                                <option value="">Select a client</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="invoice-date">Date *</label>
+                            <input type="date" id="invoice-date" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="invoice-title">Service Title *</label>
+                            <input type="text" id="invoice-title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="invoice-amount">Amount *</label>
+                            <input type="number" id="invoice-amount" step="0.01" min="0" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="invoice-description">Description</label>
+                        <textarea id="invoice-description" rows="3"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" id="cancel-invoice-btn" class="btn btn-danger">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Invoice</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="table-container">
+                <h2>All Invoices</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Invoice #</th>
+                            <th>Client</th>
+                            <th>Date</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="invoices-list">
+            
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/data.js" type="module"></script>
+    <script src="js/utils.js" type="module"></script>
+    <script src="js/invoices.js" type="module"></script>
+</body>
+</html>
