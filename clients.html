@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InvoiceFlow - Clients</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">
+                <h1><i class="fas fa-file-invoice"></i> InvoiceFlow</h1>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Dashboard</a>
+                <a href="clients.html" class="nav-link active"><i class="fas fa-users"></i> Clients</a>
+                <a href="invoices.html" class="nav-link"><i class="fas fa-receipt"></i> Invoices</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="header">
+                <h1>Client Management</h1>
+                <button id="add-client-btn" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Add Client
+                </button>
+            </header>
+
+            <section id="client-form-container" class="form-container hidden">
+                <h2 id="form-title">Add New Client</h2>
+                <form id="client-form">
+                    <input type="hidden" id="client-id">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="client-name">Name *</label>
+                            <input type="text" id="client-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="client-email">Email *</label>
+                            <input type="email" id="client-email" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="client-company">Company</label>
+                            <input type="text" id="client-company">
+                        </div>
+                        <div class="form-group">
+                            <label for="client-phone">Phone</label>
+                            <input type="tel" id="client-phone">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="client-notes">Notes</label>
+                        <textarea id="client-notes" rows="3"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" id="cancel-client-btn" class="btn btn-danger">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Client</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="table-container">
+                <h2>All Clients</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Company</th>
+                            <th>Phone</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="clients-list">
+
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/data.js" type="module"></script>
+    <script src="js/utils.js" type="module"></script>
+    <script src="js/clients.js" type="module"></script>
+</body>
+</html>
