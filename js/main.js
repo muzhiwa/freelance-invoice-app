@@ -2,34 +2,58 @@
 import { data, loadQuotes } from './data.js';
 import { updateDashboardStats, formatDate } from './utils.js';
 
-async function initDashboard() {
-  await loadQuotes();
-  
 
-  if (data.quotes.length > 0) {
-    displayRandomQuote();
-  }
+let dashboardElements = {};
+
+function initDashboard() {
+  cacheDashboardElements();
+  loadQuotes().then(() => {
+    refreshDashboard();
+    setupEventListeners();
+  });
+}
+
+function cacheDashboardElements() {
+  dashboardElements = {
+    totalClients: document.getElementById('total-clients'),
+    totalInvoices: document.getElementById('total-invoices'),
+    totalAmount: document.getElementById('total-amount'),
+    unpaidInvoices: document.getElementById('unpaid-invoices'),
+    recentInvoices: document.getElementById('recent-invoices'),
+    activeClients: document.getElementById('active-clients'),
+    quoteText: document.getElementById('quote-text'),
+    quoteAuthor: document.getElementById('quote-author')
+  };
+}
+
+function refreshDashboard() {
+  const stats = updateDashboardStats();
+  
+  // Update stats cards
+  if (dashboardElements.totalClients) dashboardElements.totalClients.textContent = stats.totalClients;
+  if (dashboardElements.totalInvoices) dashboardElements.totalInvoices.textContent = stats.totalInvoices;
+  if (dashboardElements.totalAmount) dashboardElements.totalAmount.textContent = `$${stats.totalRevenue.toFixed(2)}`;
+  if (dashboardElements.unpaidInvoices) dashboardElements.unpaidInvoices.textContent = stats.unpaidInvoices;
+
   
   renderRecentInvoices();
+  
+  
   renderActiveClients();
-  updateStatsDisplay();
+  
+  
+  showRandomQuote();
 }
 
-function displayRandomQuote() {
-  const quoteTextEl = document.getElementById('quote-text');
-  const quoteAuthorEl = document.getElementById('quote-author');
 
-  if (!data.quotes?.length) {
-    quoteTextEl.textContent = "Inspirational quotes coming soon...";
-    quoteAuthorEl.textContent = "";
-    return;
-  }
-
- 
-  const randomQuote = data.quotes[Math.floor(Math.random() * data.quotes.length)];
-
-  quoteTextEl.textContent = `"${randomQuote.text}"`;
-  quoteAuthorEl.textContent = randomQuote.author ? `— ${randomQuote.author}` : "";
+function setupEventListeners() {
+  window.addEventListener('storage', () => {
+   
+    refreshDashboard();
+  });
 }
+
+
+window.refreshDashboard = refreshDashboard;
 
 document.addEventListener('DOMContentLoaded', initDashboard);
