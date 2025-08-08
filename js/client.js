@@ -4,19 +4,30 @@ import { updateDashboardStats } from './utils.js';
 function initClientPage() {
   renderClientList();
   setupClientForm();
-  setupAddClientButton(); 
+  setupAddClientButton();
+  setupCancelButton();
 }
 
 function setupAddClientButton() {
   const addClientBtn = document.getElementById('add-client-btn');
-  const clientForm = document.getElementById('client-form');
-  const clientFormContainer = document.getElementById('client-form-container'); 
+  const formContainer = document.getElementById('client-form-container');
   
-  if (addClientBtn && clientForm) {
+  if (addClientBtn && formContainer) {
     addClientBtn.addEventListener('click', () => {
-      clientForm.reset();
-       clientFormContainer.classList.remove('hidden'); // show the section
-      clientFormContainer.scrollIntoView({ behavior: 'smooth' })
+      document.getElementById('client-id').value = '';
+      document.getElementById('client-form').reset();
+      document.getElementById('form-title').textContent = 'Add New Client';
+      formContainer.classList.remove('hidden');
+      formContainer.scrollIntoView({ behavior: 'smooth' });
+    });
+  }
+}
+
+function setupCancelButton() {
+  const cancelBtn = document.getElementById('cancel-client-btn');
+  if (cancelBtn) {
+    cancelBtn.addEventListener('click', () => {
+      document.getElementById('client-form-container').classList.add('hidden');
     });
   }
 }
@@ -30,17 +41,23 @@ function renderClientList() {
       <td>${client.name}</td>
       <td>${client.email}</td>
       <td>${client.company || '-'}</td>
+      <td>${client.phone || '-'}</td>
       <td>
-        <button class="edit-btn" data-id="${client.id}">Edit</button>
-        <button class="delete-btn" data-id="${client.id}">Delete</button>
+        <button class="btn edit-btn" data-id="${client.id}">
+          <i class="fas fa-edit"></i> Edit
+        </button>
+        <button class="btn delete-btn" data-id="${client.id}">
+          <i class="fas fa-trash"></i> Delete
+        </button>
       </td>
     </tr>
   `).join('');
 
- 
+  // Attach event listeners
   document.querySelectorAll('.edit-btn').forEach(btn => {
     btn.addEventListener('click', () => editClient(btn.dataset.id));
   });
+  
   document.querySelectorAll('.delete-btn').forEach(btn => {
     btn.addEventListener('click', () => deleteClient(btn.dataset.id));
   });
@@ -52,18 +69,22 @@ function setupClientForm() {
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    const formData = new FormData(form);
+    const clientId = document.getElementById('client-id').value;
     const clientData = {
-      name: formData.get('name'),
-      email: formData.get('email'),
-      company: formData.get('company'),
-      phone: formData.get('phone'),
-      notes: formData.get('notes')
+      name: document.getElementById('client-name').value,
+      email: document.getElementById('client-email').value,
+      company: document.getElementById('client-company').value,
+      phone: document.getElementById('client-phone').value,
+      notes: document.getElementById('client-notes').value
     };
-    
-    addClient(clientData);
-    form.reset();
-    form.classList.add('hidden'); 
+
+    if (clientId) {
+      updateClient(clientId, clientData);
+    } else {
+      addClient(clientData);
+    }
+
+    document.getElementById('client-form-container').classList.add('hidden');
     renderClientList();
   });
 }
@@ -84,23 +105,32 @@ function addClient(clientData) {
   updateDashboardStats();
 }
 
+function updateClient(clientId, clientData) {
+  const index = data.clients.findIndex(c => c.id === clientId);
+  if (index !== -1) {
+    data.clients[index] = {
+      ...data.clients[index],
+      ...clientData
+    };
+    saveData();
+    updateDashboardStats();
+  }
+}
 
 function editClient(clientId) {
   const client = data.clients.find(c => c.id === clientId);
   if (!client) return;
 
-  const form = document.getElementById('client-form');
-  if (!form) return;
-
-
-  form.elements['name'].value = client.name;
-  form.elements['email'].value = client.email;
-  form.elements['company'].value = client.company || '';
-  form.elements['phone'].value = client.phone || '';
-  form.elements['notes'].value = client.notes || '';
-
-  form.classList.remove('hidden');
-  form.scrollIntoView({ behavior: 'smooth' });
+  document.getElementById('client-id').value = client.id;
+  document.getElementById('client-name').value = client.name;
+  document.getElementById('client-email').value = client.email;
+  document.getElementById('client-company').value = client.company || '';
+  document.getElementById('client-phone').value = client.phone || '';
+  document.getElementById('client-notes').value = client.notes || '';
+  document.getElementById('form-title').textContent = 'Edit Client';
+  
+  document.getElementById('client-form-container').classList.remove('hidden');
+  document.getElementById('client-form-container').scrollIntoView({ behavior: 'smooth' });
 }
 
 function deleteClient(clientId) {
@@ -112,4 +142,4 @@ function deleteClient(clientId) {
   renderClientList();
 }
 
-document.addEventListener('DOMContentLoaded', initClientPage);   
+document.addEventListener('DOMContentLoaded', initClientPage);
