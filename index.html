@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InvoiceFlow - Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">
+                <h1> InvoiceFlow</h1>
+            </div>
+            <nav class="nav">
+                <a href="/index.html" class="nav-link active"> Dashboard</a>
+                <a href="/clients.html" class="nav-link"> Clients</a>
+                <a href="/invoices.html" class="nav-link"> Invoices</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="header">
+                <h1>Dashboard</h1>
+            </header>
+
+            <section class="stats-container">
+                <div class="stat-card card-blue">
+                    <h3 id="total-clients">0</h3>
+                    <p>Total Clients</p>
+                </div>
+                <div class="stat-card card-green">
+                    <h3 id="total-invoices">0</h3>
+                    <p>Total Invoices</p>
+                </div>
+                <div class="stat-card card-purple">
+                    <h3 id="total-amount">$0.00</h3>
+                    <p>Total Revenue</p>
+                </div>
+                <div class="stat-card card-pink">
+                    <h3 id="unpaid-invoices">0</h3>
+                    <p>Unpaid Invoices</p>
+                </div>
+            </section>
+
+            <section class="quote-card">
+                <p class="quote-text" id="quote-text">Loading motivational quote...</p>
+                <p class="quote-author" id="quote-author">- Author</p>
+            </section>
+
+            <section class="table-container">
+                <h2>Recent Invoices</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Invoice #</th>
+                            <th>Client</th>
+                            <th>Date</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recent-invoices">
+                     
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="table-container">
+                <h2>Active Clients</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Company</th>
+                            <th>Invoices</th>
+                        </tr>
+                    </thead>
+                    <tbody id="active-clients">
+                      
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/data.js" type="module"></script>
+    <script src="js/utils.js" type="module"></script>
+    <script src="js/main.js" type="module"></script>
+</body>
+</html>
