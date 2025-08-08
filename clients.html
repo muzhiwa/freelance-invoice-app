@@ -35,26 +35,26 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label for="client-name">Name *</label>
-                            <input type="text" id="client-name" required>
+                            <input type="text" id="client-name" name="name" required>
                         </div>
                         <div class="form-group">
                             <label for="client-email">Email *</label>
-                            <input type="email" id="client-email" required>
+                            <input type="email" id="client-email" name="email" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
                             <label for="client-company">Company</label>
-                            <input type="text" id="client-company">
+                            <input type="text" id="client-company" name="company">
                         </div>
                         <div class="form-group">
                             <label for="client-phone">Phone</label>
-                            <input type="tel" id="client-phone">
+                            <input type="tel" id="client-phone" name="phone">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="client-notes">Notes</label>
-                        <textarea id="client-notes" rows="3"></textarea>
+                        <textarea id="client-notes" rows="3" name="notes"></textarea>
                     </div>
                     <div class="form-actions">
                         <button type="button" id="cancel-client-btn" class="btn btn-danger">Cancel</button>
@@ -85,6 +85,6 @@
 
     <script src="js/data.js" type="module"></script>
     <script src="js/utils.js" type="module"></script>
-    <script src="js/clients.js" type="module"></script>
+    <script src="js/client.js" type="module"></script>
 </body>
 </html>

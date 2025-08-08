@@ -310,6 +310,11 @@ input:focus, select:focus, textarea:focus {
     margin-top: 20px;
 }
 
+
+.hidden {
+    display: none !important;
+}
+
 @media (max-width: 768px) {
     .container {
         flex-direction: column;
