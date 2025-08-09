@@ -3,7 +3,7 @@ const defaultClients = [
   {
     id: "1",
     name: "Farida Noori",
-    email: "farida.n@gamil.com",
+    email: "farida.n@gmail.com",
     company: "Herat Spice Traders",
     phone: "+93 79 234 5678",
     notes: "Regular customer"
@@ -54,7 +54,7 @@ const defaultClients = [
     email: "narges45@gmail.com",
     company: "Lessani Online Shop",
     phone: "+93 79 095 3424",
-    notes: "VIP Cilent"
+    notes: "VIP Client"
   }
 ];
 
@@ -107,7 +107,7 @@ const defaultInvoices = [
     title: "Web design",
     description: "Wireframe using Figma",
     amount: 200,
-    paid: True,
+    paid: true,
     dueDate: "2025-08-11"
   }, 
 
@@ -118,7 +118,7 @@ const defaultInvoices = [
     title: "Flyer Desisn",
     description: "Design a Flyer using photoshop",
     amount: 100,
-    paid: True,
+    paid: true,
     dueDate: "2025-06-03"
   }, 
 
