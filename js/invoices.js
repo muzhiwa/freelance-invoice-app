@@ -74,7 +74,7 @@ function renderInvoiceList() {
     `;
   }).join('');
 
-  // Add event listeners
+  
   document.querySelectorAll('.mark-paid-btn').forEach(btn => {
     btn.addEventListener('click', () => markAsPaid(btn.dataset.id));
   });
@@ -132,8 +132,18 @@ function addInvoice(invoiceData) {
     return;
   }
 
+ 
+  const defaultInvoices = data.invoices.filter(i => i.id.startsWith('INV-1'));
+  const highestDefault = defaultInvoices.reduce((max, inv) => {
+    const num = parseInt(inv.id.split('-')[1]);
+    return num > max ? num : max;
+  }, 1000);
+  const nextId = data.invoices.length > 0 ? 
+    `INV-${(parseInt(data.invoices[data.invoices.length-1].id.split('-')[1]) + 1)}` :
+    `INV-${highestDefault + 1}`;
+
   const newInvoice = {
-    id: `INV-${Date.now().toString().slice(-6)}`,
+    id: nextId,
     ...invoiceData
   };
 

@@ -53,7 +53,7 @@ function renderClientList() {
     </tr>
   `).join('');
 
-  // Attach event listeners
+  
   document.querySelectorAll('.edit-btn').forEach(btn => {
     btn.addEventListener('click', () => editClient(btn.dataset.id));
   });
@@ -95,8 +95,11 @@ function addClient(clientData) {
     return;
   }
 
+  const defaultIds = data.clients.filter(c => c.id.length <= 2).map(c => parseInt(c.id));
+  const newId = defaultIds.length > 0 ? (Math.max(...defaultIds) + 1).toString() : Date.now().toString();
+
   const newClient = {
-    id: Date.now().toString(),
+    id: newId,
     ...clientData
   };
 
